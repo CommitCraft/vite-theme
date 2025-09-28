@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import Logo from '../assets/logo.png'
 import AplosLogo from './AplosLogo';
 
 function Navbar() {

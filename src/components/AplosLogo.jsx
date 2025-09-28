@@ -15,12 +15,12 @@ const AplosLogo = () => {
       justifyContent: "center",
     },
     brace: {
-      fontSize: "clamp(18px, 6vw, 30px)", // min 18px, scales, max 30px
+      fontSize: "clamp(18px, 6vw, 25px)", // min 18px, scales, max 25px
       fontWeight: "bold",
       color: "#1d9bf0", // blue
     },
     aplos: {
-      fontSize: "clamp(18px, 6vw, 30px)",
+      fontSize: "clamp(18px, 6vw, 25px)",
       fontFamily: "Georgia, serif",
       fontWeight: "bold",
       color: "#e6782f", // orange
@@ -30,6 +30,7 @@ const AplosLogo = () => {
       fontSize: "clamp(6px, 3vw, 16px)", // responsive tagline
       fontWeight: "300",
       color: "#fff",
+      margin: 0, // removes default <p> margin
     },
   };
 

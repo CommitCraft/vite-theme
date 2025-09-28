@@ -111,14 +111,31 @@ function Customers() {
     }
   ];
 
-  // Auto-rotate customers
+  // Auto-rotate customers with seamless loop
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % customers.length);
+      setCurrentIndex((prevIndex) => {
+        // Create seamless loop: when reaching the end, jump to beginning
+        if (prevIndex >= customers.length - 1) {
+          return 0;
+        }
+        return prevIndex + 1;
+      });
     }, 4000);
 
     return () => clearInterval(interval);
   }, [customers.length]);
+
+  // Create extended array for seamless looping
+  // Add last 2 items at the beginning and first 2 items at the end
+  const extendedCustomers = [
+    ...customers.slice(-2), // Last 2 items at beginning
+    ...customers,           // Original array
+    ...customers.slice(0, 2) // First 2 items at end
+  ];
+
+  // Adjust the display index for the extended array
+  const displayIndex = currentIndex + 2;
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -145,22 +162,27 @@ function Customers() {
       <div style={{ marginBottom: '4rem' }}>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
+          gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(auto-fit, minmax(200px, 1fr))',
           gap: '2rem',
           marginBottom: '2rem'
         }}>
-          {customers.slice(currentIndex, currentIndex + 3).map((customer, index) => (
+          {extendedCustomers.slice(displayIndex, displayIndex + 6).map((customer, index) => (
             <div 
-              key={index} 
+              key={`${customer.name}-${index}`} 
               style={{
                 background: 'rgba(255, 255, 255, 0.03)',
                 border: '1px solid rgba(255, 94, 0, 0.2)',
                 borderRadius: '20px',
-                padding: '2rem',
+                padding: '1.5rem',
                 backdropFilter: 'blur(10px)',
                 transition: 'all 0.3s ease',
                 cursor: 'pointer',
-                textAlign: 'center'
+                textAlign: 'center',
+                minHeight: '200px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
               onMouseEnter={(e) => {
                 e.target.style.transform = 'translateY(-5px)';
@@ -176,117 +198,34 @@ function Customers() {
               <div style={{ 
                 display: 'flex', 
                 justifyContent: 'center', 
-                marginBottom: '1.5rem' 
+                marginBottom: '1rem',
+                flex: 1,
+                alignItems: 'center'
               }}>
                 <img 
                   src={customer.logo} 
                   alt={customer.name} 
                   style={{
-                    width: '120px',
-                    height: '80px',
+                    width: '150px',
+                    height: '100px',
                     objectFit: 'contain',
-                    borderRadius: '10px',
+                    borderRadius: '12px',
                     background: 'rgba(255, 255, 255, 0.1)',
-                    padding: '0.5rem'
+                    padding: '1rem',
+                    filter: 'brightness(1.1)'
                   }}
                 />
               </div>
-              <div>
-                <h3 style={{
-                  fontSize: '1.25rem',
-                  fontWeight: 'bold',
-                  color: '#ffffff',
-                  marginBottom: '0.5rem'
-                }}>
-                  {customer.name}
-                </h3>
-                <p style={{
-                  color: '#FF5E00',
-                  fontSize: '0.9rem',
-                  fontWeight: '500',
-                  marginBottom: '0.25rem'
-                }}>
-                  {customer.industry}
-                </p>
-                <p style={{
-                  color: '#00B2FF',
-                  fontSize: '0.9rem',
-                  fontWeight: '500',
-                  marginBottom: '1rem'
-                }}>
-                  {customer.solution}
-                </p>
-                <p style={{
-                  color: 'rgba(255, 255, 255, 0.8)',
-                  fontSize: '0.9rem',
-                  lineHeight: '1.5',
-                  marginBottom: '1rem'
-                }}>
-                  {customer.description}
-                </p>
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.5rem'
-                }}>
-                  <span style={{
-                    width: '8px',
-                    height: '8px',
-                    backgroundColor: '#10b981',
-                    borderRadius: '50%'
-                  }}></span>
-                  <span style={{
-                    color: '#10b981',
-                    fontSize: '0.9rem',
-                    fontWeight: '500'
-                  }}>
-                    {customer.status}
-                  </span>
-                </div>
-              </div>
+              <h3 style={{
+                fontSize: '1.1rem',
+                fontWeight: 'bold',
+                color: '#ffffff',
+                margin: '0',
+                textAlign: 'center'
+              }}>
+                {customer.name}
+              </h3>
             </div>
-          ))}
-        </div>
-
-        {/* Navigation dots */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          gap: isMobile ? '0.3rem' : '0.75rem'
-        }}>
-          {Array.from({ length: Math.ceil(customers.length / 3) }).map((_, index) => (
-            <button
-              key={index}
-              style={{
-                width: isMobile ? '6px' : '12px',
-                height: isMobile ? '6px' : '12px',
-                borderRadius: '50%',
-                border: 'none',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
-                background: index === Math.floor(currentIndex / 3) 
-                  ? 'linear-gradient(45deg, #FF5E00, #00B2FF)' 
-                  : 'rgba(255, 255, 255, 0.3)',
-                transform: index === Math.floor(currentIndex / 3) 
-                  ? (isMobile ? 'scale(1.1)' : 'scale(1.25)') 
-                  : 'scale(1)',
-                boxShadow: index === Math.floor(currentIndex / 3) 
-                  ? '0 0 15px rgba(255, 94, 0, 0.5)' 
-                  : 'none'
-              }}
-              onClick={() => setCurrentIndex(index * 3)}
-              onMouseEnter={(e) => {
-                if (index !== Math.floor(currentIndex / 3)) {
-                  e.target.style.background = 'rgba(255, 255, 255, 0.5)';
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (index !== Math.floor(currentIndex / 3)) {
-                  e.target.style.background = 'rgba(255, 255, 255, 0.3)';
-                }
-              }}
-            />
           ))}
         </div>
         </div>

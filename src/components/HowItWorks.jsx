@@ -140,8 +140,8 @@ function HowItWorks() {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: isMobile ? '1.5rem' : '2rem'
+          gridTemplateColumns: isMobile ? '1fr' : 'repeat(4, 1fr)',
+          gap: isMobile ? '1.5rem' : '1.5rem'
         }}>
           {steps.map((step, index) => (
             <div key={step.key} className="animate-on-scroll" style={{
@@ -151,12 +151,15 @@ function HowItWorks() {
               <div style={{
                 background: 'rgba(255, 255, 255, 0.03)',
                 backdropFilter: 'blur(10px)',
-                borderRadius: '20px',
-                padding: '2rem',
+                borderRadius: '15px',
+                padding: '1.5rem',
                 border: '1px solid rgba(255, 94, 0, 0.2)',
                 transition: 'all 0.3s ease',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                minHeight: '320px',
+                display: 'flex',
+                flexDirection: 'column'
               }}
               onMouseEnter={(e) => {
                 e.target.style.transform = 'translateY(-5px)';
@@ -167,43 +170,22 @@ function HowItWorks() {
                 e.target.style.boxShadow = 'none';
               }}
               >
-                {/* Phase Badge */}
-                <div style={{
-                  position: 'absolute',
-                  top: '1rem',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  width: '3rem',
-                  height: '3rem',
-                  background: `linear-gradient(45deg, #${index === 0 ? '10b981' : index === 1 ? '3b82f6' : index === 2 ? '22c55e' : 'eab308'}, #${index === 0 ? '14b8a6' : index === 1 ? '6366f1' : index === 2 ? '16a34a' : 'f59e0b'})`,
-                  color: 'white',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontWeight: 'bold',
-                  fontSize: '1.2rem',
-                  boxShadow: '0 0 20px rgba(255, 94, 0, 0.5)'
-                }}>
-                  {step.key}
-                </div>
-
                 {/* Icon */}
                 <div style={{
-                  fontSize: '3rem',
+                  fontSize: '2.5rem',
                   textAlign: 'center',
-                  margin: '2rem 0 1rem'
+                  margin: '1rem 0'
                 }}>
                   {step.icon}
                 </div>
 
                 {/* Title */}
                 <h3 style={{
-                  fontSize: '1.3rem',
+                  fontSize: '1.1rem',
                   fontWeight: 'bold',
                   color: 'white',
                   textAlign: 'center',
-                  marginBottom: '1rem'
+                  marginBottom: '0.8rem'
                 }}>
                   {step.title}
                 </h3>
@@ -212,8 +194,10 @@ function HowItWorks() {
                 <p style={{
                   color: 'rgba(255, 255, 255, 0.8)',
                   textAlign: 'center',
-                  marginBottom: '1.5rem',
-                  lineHeight: '1.6'
+                  marginBottom: '1rem',
+                  lineHeight: '1.5',
+                  fontSize: '0.9rem',
+                  flex: 1
                 }}>
                   {step.description}
                 </p>
@@ -221,21 +205,23 @@ function HowItWorks() {
                 {/* Details */}
                 <ul style={{
                   listStyle: 'none',
-                  padding: '0'
+                  padding: '0',
+                  marginTop: 'auto'
                 }}>
                   {step.details.map((detail, di) => (
                     <li key={di} style={{
                       display: 'flex',
                       alignItems: 'center',
-                      marginBottom: '0.5rem',
-                      color: 'rgba(255, 255, 255, 0.7)'
+                      marginBottom: '0.4rem',
+                      color: 'rgba(255, 255, 255, 0.7)',
+                      fontSize: '0.85rem'
                     }}>
                       <span style={{
-                        width: '8px',
-                        height: '8px',
+                        width: '6px',
+                        height: '6px',
                         background: `linear-gradient(45deg, #${index === 0 ? '10b981' : index === 1 ? '3b82f6' : index === 2 ? '22c55e' : 'eab308'}, #${index === 0 ? '14b8a6' : index === 1 ? '6366f1' : index === 2 ? '16a34a' : 'f59e0b'})`,
                         borderRadius: '50%',
-                        marginRight: '0.75rem',
+                        marginRight: '0.6rem',
                         flexShrink: '0'
                       }}></span>
                       {detail}

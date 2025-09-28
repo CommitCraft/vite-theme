@@ -293,9 +293,9 @@ function Testimonials() {
       <div style={{
         marginTop: '4rem',
         display: 'grid',
-        gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(auto-fit, minmax(200px, 1fr))',
-        gap: isMobile ? '1.5rem' : '2rem',
-        maxWidth: '800px',
+        gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4, 1fr)',
+        gap: isMobile ? '1.5rem' : '1.5rem',
+        maxWidth: '1000px',
         marginLeft: 'auto',
         marginRight: 'auto'
       }}>
@@ -307,14 +307,27 @@ function Testimonials() {
         ].map((stat, index) => (
           <div key={index} style={{
             textAlign: 'center',
-            padding: '2rem',
+            padding: '1.5rem 1rem',
             background: 'rgba(255, 255, 255, 0.03)',
             border: '1px solid rgba(255, 94, 0, 0.2)',
             borderRadius: '15px',
-            backdropFilter: 'blur(10px)'
-          }}>
+            backdropFilter: 'blur(10px)',
+            transition: 'all 0.3s ease',
+            cursor: 'pointer'
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.transform = 'translateY(-5px)';
+            e.target.style.boxShadow = '0 10px 30px rgba(0, 178, 255, 0.3)';
+            e.target.style.borderColor = 'rgba(0, 178, 255, 0.4)';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.transform = 'translateY(0)';
+            e.target.style.boxShadow = 'none';
+            e.target.style.borderColor = 'rgba(255, 94, 0, 0.2)';
+          }}
+          >
             <div style={{
-              fontSize: '2.5rem',
+              fontSize: isMobile ? '2rem' : '2.2rem',
               fontWeight: 'bold',
               color: '#00B2FF',
               marginBottom: '0.5rem'
@@ -323,7 +336,8 @@ function Testimonials() {
             </div>
             <div style={{
               color: 'rgba(255, 255, 255, 0.8)',
-              fontSize: '1rem'
+              fontSize: isMobile ? '0.9rem' : '1rem',
+              lineHeight: '1.4'
             }}>
               {stat.label}
             </div>

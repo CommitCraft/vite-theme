@@ -211,8 +211,8 @@ function Hero() {
       {/* Features */}
       <div className="hero-features">
         {features.map((feature, index) => (
-          <div key={index} className="hero-feature-card">
-            <img src={feature.icon} alt={feature.title} className="feature-icon" />
+          <div key={index} className="hero-feature-card ">
+            <img src={feature.icon} alt={feature.title} className="feature-icon " />
             <h3>{feature.title}</h3>
             <p>{feature.description}</p>
           </div>

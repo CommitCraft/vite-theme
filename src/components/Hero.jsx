@@ -1,147 +1,145 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import handImage from "../assets/hand.webp";
+import targetImage from "../assets/target.webp";
+import checkCircleImage from "../assets/check-circle.webp";
+import coinsImage from "../assets/cost.webp";
 
 function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Check for mobile screen size
+  // ✅ Screen size check
   useEffect(() => {
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-
     checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-
-    return () => window.removeEventListener('resize', checkScreenSize);
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-  // Updated with Saral Tech data
+  // ✅ Text sets
   const textSets = [
     {
       title: "SMART IIOT SOLUTIONS",
-      subtitle: "Simplifying Industrial Innovation with Industry 4.0"
+      subtitle: "Simplifying Industrial Innovation with Industry 4.0",
     },
     {
       title: "NEXT-GEN INDUSTRIAL",
-      subtitle: "Cutting-edge IIoT-driven solutions for modern industries"
+      subtitle: "Cutting-edge IIoT-driven solutions for modern industries",
     },
     {
       title: "TRANSFORM YOUR FACTORY",
-      subtitle: "Real-time monitoring and scalable automation"
-    }
+      subtitle: "Real-time monitoring and scalable automation",
+    },
   ];
 
-  // Saral Tech features data
+  // ✅ Features
   const features = [
     {
-      icon: "✋",
+      icon: handImage,
       title: "Simple, Easy, Fast",
-      description: "No technological jargon, no fuss."
+      description: "No technological jargon, no fuss.",
     },
     {
-      icon: "🎯",
+      icon: targetImage,
       title: "To the Point",
-      description: "Everything that's needed—no fancy frills."
+      description: "Everything that's needed—no fancy frills.",
     },
     {
-      icon: "✅",
+      icon: checkCircleImage,
       title: "Accurate & Reliable",
-      description: "High focus on accuracy & reliability."
+      description: "High focus on accuracy & reliability.",
     },
     {
-      icon: "💰",
+      icon: coinsImage,
       title: "Cost Effective",
-      description: "Simplicity saves money."
-    }
+      description: "Simplicity saves money.",
+    },
   ];
 
+  // ✅ Text rotation effect
   useEffect(() => {
-    // Text rotation with character animation
-    const textSets = document.querySelectorAll('.text-set');
-    let currentIndex = 0;
-    let isAnimating = false;
+    const domTextSets = document.querySelectorAll(".text-set");
+    let localIndex = 0;
+    let localAnimating = false;
 
     function wrapTextInSpans(element) {
       const text = element.textContent;
-      element.innerHTML = text.split('').map((char, i) => 
-        `<span class="char" style="animation-delay: ${i * 0.05}s">${char === ' ' ? '&nbsp;' : char}</span>`
-      ).join('');
+      element.innerHTML = text
+        .split("")
+        .map(
+          (char, i) =>
+            `<span class="char" style="animation-delay: ${
+              i * 0.05
+            }s">${char === " " ? "&nbsp;" : char}</span>`
+        )
+        .join("");
     }
 
     function animateTextIn(textSet) {
-      const glitchText = textSet.querySelector('.glitch-text');
-      const subtitle = textSet.querySelector('.subtitle');
-      
-      // Wrap text in spans for animation
+      const glitchText = textSet.querySelector(".glitch-text");
+      const subtitle = textSet.querySelector(".subtitle");
+
       wrapTextInSpans(glitchText);
-      
-      // Update data attribute for glitch effect
-      glitchText.setAttribute('data-text', glitchText.textContent);
-      
-      // Show subtitle after main text
+      glitchText.setAttribute("data-text", glitchText.textContent);
+
       setTimeout(() => {
-        subtitle.classList.add('visible');
+        subtitle.classList.add("visible");
       }, 800);
     }
 
     function animateTextOut(textSet) {
-      const chars = textSet.querySelectorAll('.char');
-      const subtitle = textSet.querySelector('.subtitle');
-      
-      // Animate characters out
+      const chars = textSet.querySelectorAll(".char");
+      const subtitle = textSet.querySelector(".subtitle");
+
       chars.forEach((char, i) => {
-        char.style.animationDelay = `${i * 0.5}s`;
-        char.classList.add('out');
+        char.style.animationDelay = `${i * 0.05}s`;
+        char.classList.add("out");
       });
-      
-      // Hide subtitle
-      subtitle.classList.remove('visible');
+
+      subtitle.classList.remove("visible");
     }
 
     function rotateText() {
-      if (isAnimating) return;
-      isAnimating = true;
+      if (localAnimating) return;
+      localAnimating = true;
 
-      const currentSet = textSets[currentIndex];
-      const nextIndex = (currentIndex + 1) % textSets.length;
-      const nextSet = textSets[nextIndex];
+      const currentSet = domTextSets[localIndex];
+      const nextIndex = (localIndex + 1) % domTextSets.length;
+      const nextSet = domTextSets[nextIndex];
 
-      // Animate out current text
       animateTextOut(currentSet);
 
-      // After out animation, switch sets
       setTimeout(() => {
-        currentSet.classList.remove('active');
-        nextSet.classList.add('active');
+        currentSet.classList.remove("active");
+        nextSet.classList.add("active");
         animateTextIn(nextSet);
-        
-        currentIndex = nextIndex;
-        setCurrentIndex(currentIndex);
-        isAnimating = false;
+
+        localIndex = nextIndex;
+        setCurrentIndex(nextIndex);
+        localAnimating = false;
       }, 600);
     }
 
-    // Initialize first text set
-    if (textSets.length > 0) {
-      textSets[0].classList.add('active');
-      animateTextIn(textSets[0]);
+    // ✅ Init first
+    if (domTextSets.length > 0) {
+      domTextSets[0].classList.add("active");
+      animateTextIn(domTextSets[0]);
 
-      // Start rotation after initial display
       setTimeout(() => {
-        setInterval(rotateText, 5000); // Change every 5 seconds
+        setInterval(rotateText, 5000);
       }, 4000);
     }
 
-    // Add random glitch effect
+    // ✅ Glitch effect
     const glitchInterval = setInterval(() => {
-      const glitchTexts = document.querySelectorAll('.glitch-text');
-      glitchTexts.forEach(text => {
+      const glitchTexts = document.querySelectorAll(".glitch-text");
+      glitchTexts.forEach((text) => {
         if (Math.random() > 0.95) {
-          text.style.animation = 'none';
+          text.style.animation = "none";
           setTimeout(() => {
-            text.style.animation = '';
+            text.style.animation = "";
           }, 200);
         }
       });
@@ -150,10 +148,11 @@ function Hero() {
     return () => clearInterval(glitchInterval);
   }, []);
 
+  // ✅ Scroll helper
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
@@ -162,44 +161,58 @@ function Hero() {
       <div className="hero-content">
         <div className="text-rotator">
           {textSets.map((textSet, index) => (
-            <div key={index} className={`text-set ${index === 0 ? 'active' : ''}`}>
-              <h1 className="glitch-text" data-text={textSet.title}>{textSet.title}</h1>
+            <div
+              key={index}
+              className={`text-set ${index === 0 ? "active" : ""}`}
+            >
+              <h1 className="glitch-text" data-text={textSet.title}>
+                {textSet.title}
+              </h1>
               <p className="subtitle">{textSet.subtitle}</p>
             </div>
           ))}
         </div>
-        
-        {/* Saral Tech tagline */}
+
+        {/* Tagline */}
         <div className="hero-tagline">
           <p className="company-intro">
-            We provide cutting-edge IIoT-driven solutions that seamlessly connect and simplify
-            industrial systems. Our intelligent platform enables smart automation,
-            real-time monitoring, and scalable Industry 4.0 transformation.
+            We provide cutting-edge IIoT-driven solutions that seamlessly connect
+            and simplify industrial systems. Our intelligent platform enables
+            smart automation, real-time monitoring, and scalable Industry 4.0
+            transformation.
           </p>
         </div>
       </div>
-      
-      <div className="cta-container" style={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center',
-        width: '100%',
-        textAlign: 'center',
-        margin: '0 auto'
-      }}>
-        <a href="#features" className="cta-button cta-primary" onClick={(e) => { e.preventDefault(); scrollToSection('features'); }}>
+
+      {/* CTA Buttons */}
+      <div className="cta-container">
+        <a
+          href="#features"
+          className="cta-button cta-primary"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("features");
+          }}
+        >
           Explore Our Solutions
         </a>
-        <a href="#about" className="cta-button cta-secondary" onClick={(e) => { e.preventDefault(); scrollToSection('about'); }}>
+        <a
+          href="#about"
+          className="cta-button cta-secondary"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("about");
+          }}
+        >
           How It Works
         </a>
       </div>
-      
-      {/* Feature highlights */}
+
+      {/* Features */}
       <div className="hero-features">
         {features.map((feature, index) => (
           <div key={index} className="hero-feature-card">
-            <div className="feature-icon">{feature.icon}</div>
+            <img src={feature.icon} alt={feature.title} className="feature-icon" />
             <h3>{feature.title}</h3>
             <p>{feature.description}</p>
           </div>

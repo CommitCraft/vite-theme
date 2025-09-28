@@ -47,7 +47,7 @@ function About() {
         fontSize: isSmallMobile ? '1.8rem' : isMobile ? '2.2rem' : isTablet ? '2.6rem' : '3rem',
         marginBottom: isSmallMobile ? '1rem' : isMobile ? '1.5rem' : '2rem'
       }}>
-        About Saral Technologies
+        About Aplos Logix Pvt. Ltd.
       </h2>
       <div className="about-content" style={{
         display: 'grid',
@@ -70,7 +70,7 @@ function About() {
             lineHeight: isSmallMobile ? '1.5' : '1.6',
             marginBottom: isSmallMobile ? '1rem' : '1.5rem'
           }}>
-            At <strong style={{ color: '#FF5E00' }}>Saral Technologies</strong>, we believe that 
+            At <strong style={{ color: '#FF5E00' }}>Aplos Logix Pvt. Ltd.</strong>, we believe that 
             the most powerful technology is invisible technology. We create IIoT solutions that work 
             seamlessly behind the scenes, empowering manufacturers to achieve extraordinary results 
             without complexity.

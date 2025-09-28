@@ -49,8 +49,7 @@ function Contact() {
         lineHeight: '1.6',
         padding: isMobile ? '0 1rem' : '0'
       }}>
-        Ready to transform your industrial operations? Let's discuss how our IIoT, HVAC, Electrical, 
-        and Safety solutions can help your business grow.
+        Ready to transform your industrial operations? Let's discuss how our IIoT-driven solutions that seamlessly connect and simplify industrial systems can help your business grow.
       </p>
       <div className="contact-container">
         <div className="contact-form">
@@ -143,14 +142,15 @@ function Contact() {
           
           {/* Email Addresses */}
           <div className="info-item">
-            <div className="info-icon">📧</div>
-            <div className="info-details">
-              <h4>Email Us</h4>
-              <p>info@saraltech.in</p>
-              <p>sales@saraltech.in</p>
-              <p>jagdeep@saraltech.in</p>
-            </div>
-          </div>
+  <div className="info-icon">📧</div>
+  <div className="info-details">
+    <h4>Email Us</h4>
+    <p><a href="mailto:info@saraltech.in" style={{ color: 'white', textDecoration: 'none' }}>info@saraltech.in</a></p>
+    <p><a href="mailto:sales@saraltech.in" style={{ color: 'white', textDecoration: 'none' }}>sales@saraltech.in</a></p>
+    <p><a href="mailto:jagdeep.sharma@saraltech.in" style={{ color: 'white', textDecoration: 'none' }}>jagdeep.sharma@saraltech.in</a></p>
+  </div>
+</div>
+
           
           {/* Business Hours */}
           <div className="info-item">

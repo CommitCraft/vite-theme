@@ -140,11 +140,11 @@ function App() {
       <FloatingParticles />
       <Navbar />
       <Hero />
-      <Features />
-      <Customers />
-      <Industries />
-      <HowItWorks />
       <About />
+      <Features />
+      <HowItWorks />
+      <Industries />
+      <Customers />
       <Testimonials />
       <Contact />
       <Footer />

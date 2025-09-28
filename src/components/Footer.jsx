@@ -8,7 +8,7 @@ function Footer() {
           <a href="#careers">Careers</a>
         </div>
         <p className="copyright">
-          © 2025 SARAL TECHNOLOGIES. All rights reserved. 
+          © 2025 Aplos Logix Pvt. Ltd. All rights reserved. 
           Transforming Industries with Smart IIoT & Industry 4.0 Solutions. 
          
         </p>

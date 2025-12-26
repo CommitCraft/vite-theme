@@ -145,11 +145,12 @@ function Contact() {
   <div className="info-icon">📧</div>
   <div className="info-details">
     <h4>Email Us</h4>
-    <p><a href="mailto:info@saraltech.in" style={{ color: 'white', textDecoration: 'none' }}>info@saraltech.in</a></p>
-    <p><a href="mailto:sales@saraltech.in" style={{ color: 'white', textDecoration: 'none' }}>sales@saraltech.in</a></p>
+    <p><a href="mailto:info@aploslogix.com" style={{ color: 'white', textDecoration: 'none' }}>info@aploslogix.com</a></p>
+    <p><a href="mailto:sales@aploslogix.com" style={{ color: 'white', textDecoration: 'none' }}>sales@aploslogix.com</a></p>
     <p><a href="mailto:jagdeep.sharma@saraltech.in" style={{ color: 'white', textDecoration: 'none' }}>jagdeep.sharma@saraltech.in</a></p>
   </div>
 </div>
+
 
           
           {/* Business Hours */}
@@ -192,7 +193,7 @@ function Contact() {
                 📞 Call Now
               </a>
               <a 
-                href="mailto:info@saraltech.in" 
+                href="mailto:info@aploslogix.com" 
                 style={{
                   padding: '10px 20px',
                   border: '2px solid #FF5E00',

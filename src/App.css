@@ -47,6 +47,12 @@
     animation: logo-spin infinite 20s linear;
   }
 }
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 
 .card {
   padding: 2em;

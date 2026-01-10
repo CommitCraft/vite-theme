@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import emailjs from "@emailjs/browser";
 
-const [isSending, setIsSending] = useState(false);
+
 
 function Contact() {
   const [isMobile, setIsMobile] = useState(false);
+  const [isSending, setIsSending] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -157,7 +158,39 @@ function Contact() {
                 rows="6"
               ></textarea>
             </div>
-            <button type="submit" className="submit-btn">Send Message</button>
+            {/* <button type="submit" className="submit-btn">Send Message</button> */}
+            <button
+  type="submit"
+  className="submit-btn"
+  disabled={isSending}
+  style={{
+    opacity: isSending ? 0.7 : 1,
+    cursor: isSending ? "not-allowed" : "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "8px"
+  }}
+>
+  {isSending ? (
+    <>
+      <span
+        style={{
+          width: "16px",
+          height: "16px",
+          border: "2px solid #fff",
+          borderTop: "2px solid transparent",
+          borderRadius: "50%",
+          animation: "spin 0.8s linear infinite"
+        }}
+      />
+      Sending...
+    </>
+  ) : (
+    "Send Message"
+  )}
+</button>
+
           </form>
         </div>
         <div className="contact-info">

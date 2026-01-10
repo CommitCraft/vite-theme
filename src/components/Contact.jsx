@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import emailjs from "@emailjs/browser";
 
 function Contact() {
   const [isMobile, setIsMobile] = useState(false);
@@ -30,12 +31,47 @@ function Contact() {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here
-    alert('Thank you for contacting Saral Technologies! We\'ll get back to you soon.');
-    setFormData({ name: '', email: '', company: '', phone: '', message: '' });
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // Handle form submission here
+  //   alert('Thank you for contacting Saral Technologies! We\'ll get back to you soon.');
+  //   setFormData({ name: '', email: '', company: '', phone: '', message: '' });
+  // };
+
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    // 1️⃣ Send mail to company
+    await emailjs.send(
+      "service_vii3z6w",
+      "template_m5joiux",
+      formData,
+      "6l3f9E_ce9hpxYotb"
+    );
+
+    // 2️⃣ Send thank you mail to user
+    await emailjs.send(
+      "service_vii3z6w",
+      "template_mw7h2my",
+      formData,
+      "6l3f9E_ce9hpxYotb"
+    );
+
+    alert("Thank you! Your message has been sent.");
+    setFormData({
+      name: "",
+      email: "",
+      company: "",
+      phone: "",
+      message: ""
+    });
+
+  } catch (error) {
+    console.error(error);
+    alert("Failed to send message. Please try again later.");
+  }
+};
 
   return (
     <section className="contact" id="contact">

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import emailjs from "@emailjs/browser";
 
+const [isSending, setIsSending] = useState(false);
+
 function Contact() {
   const [isMobile, setIsMobile] = useState(false);
   const [formData, setFormData] = useState({
@@ -41,6 +43,10 @@ function Contact() {
   const handleSubmit = async (e) => {
   e.preventDefault();
 
+  if (isSending) return; // safety
+
+  setIsSending(true);
+
   try {
     // 1️⃣ Send mail to company
     await emailjs.send(
@@ -59,6 +65,7 @@ function Contact() {
     );
 
     alert("Thank you! Your message has been sent.");
+
     setFormData({
       name: "",
       email: "",
@@ -70,6 +77,8 @@ function Contact() {
   } catch (error) {
     console.error(error);
     alert("Failed to send message. Please try again later.");
+  } finally {
+    setIsSending(false);
   }
 };
 
